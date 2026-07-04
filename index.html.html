@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spoorti Inganalli — Data Analyst & Python Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F2F4F3;
+    --surface:#FFFFFF;
+    --ink:#16211E;
+    --ink-soft:#5B6863;
+    --primary:#5B4FE0;
+    --primary-dim:#EEEBFC;
+    --amber:#B5760F;
+    --amber-dim:#FBF0DC;
+    --success:#1F9D6B;
+    --border:#DEE3DF;
+    --display:'Space Grotesk', sans-serif;
+    --body:'Work Sans', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;} }
+  body{background:var(--bg); color:var(--ink); font-family:var(--body); line-height:1.6;}
+  a{color:var(--primary); text-decoration:none;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--primary); outline-offset:3px;}
+  img,svg{display:block;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 28px;}
+  section{padding:72px 0;}
+  h2{font-family:var(--display); font-size:26px; font-weight:600; margin-bottom:8px;}
+  .eyebrow{font-family:var(--mono); font-size:12.5px; color:var(--primary); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:10px;}
+  .section-sub{color:var(--ink-soft); max-width:520px; margin-bottom:36px; font-size:15px;}
+
+  /* ---- top nav ---- */
+  header{
+    position:sticky; top:0; z-index:20;
+    background:rgba(242,244,243,0.88); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  header .wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 28px;}
+  .brand{font-family:var(--display); font-weight:700; font-size:17px;}
+  .brand span{color:var(--primary);}
+  nav{display:flex; gap:24px; font-family:var(--mono); font-size:13px;}
+  nav a{color:var(--ink-soft);}
+  nav a:hover{color:var(--ink);}
+  .nav-cta{
+    font-family:var(--mono); font-size:13px; font-weight:500;
+    background:var(--ink); color:#fff !important; padding:8px 16px; border-radius:6px;
+  }
+  @media (max-width:720px){ nav .nav-links{display:none;} }
+
+  /* ---- hero ---- */
+  .hero{padding:64px 0 40px;}
+  .hero-grid{display:grid; grid-template-columns:1.2fr 0.9fr; gap:40px; align-items:start;}
+  @media (max-width:820px){ .hero-grid{grid-template-columns:1fr;} }
+
+  .status-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--mono); font-size:12.5px; color:var(--success);
+    background:#E7F6EF; border:1px solid #BFE6D3; padding:6px 14px; border-radius:16px;
+    margin-bottom:22px;
+  }
+  .status-pill .dot{width:7px; height:7px; border-radius:50%; background:var(--success); animation:pulse 1.8s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.3;}}
+
+  .hero h1{font-family:var(--display); font-size:44px; font-weight:700; line-height:1.12; margin-bottom:14px;}
+  .hero h1 .accent{color:var(--primary);}
+  .hero p.pitch{font-size:16.5px; color:var(--ink-soft); max-width:480px; margin-bottom:26px;}
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13.5px; font-weight:500;
+    padding:12px 20px; border-radius:7px; display:inline-flex; align-items:center; gap:8px;
+    border:1px solid transparent; cursor:pointer;
+  }
+  .btn-primary{background:var(--primary); color:#fff;}
+  .btn-primary:hover{background:#4A3FD1; text-decoration:none;}
+  .btn-ghost{background:var(--surface); color:var(--ink); border-color:var(--border);}
+  .btn-ghost:hover{border-color:var(--primary); text-decoration:none;}
+
+  /* ---- recruiter quick-view card ---- */
+  .quickview{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    padding:26px; box-shadow:0 1px 2px rgba(20,20,15,0.03);
+  }
+  .quickview .qv-label{font-family:var(--mono); font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:16px;}
+  .qv-row{display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px dashed var(--border); font-size:14px;}
+  .qv-row:last-of-type{border-bottom:none;}
+  .qv-row .k{color:var(--ink-soft);}
+  .qv-row .v{font-weight:600; text-align:right;}
+  .qv-links{display:flex; gap:10px; margin-top:18px;}
+  .qv-links a{
+    flex:1; text-align:center; font-family:var(--mono); font-size:12.5px;
+    padding:9px 0; border:1px solid var(--border); border-radius:6px; color:var(--ink);
+  }
+  .qv-links a:hover{border-color:var(--primary); color:var(--primary); text-decoration:none;}
+
+  /* ---- stat strip ---- */
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; padding:44px 0;}
+  @media (max-width:720px){ .stats{grid-template-columns:repeat(2,1fr);} }
+  .stat-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:20px;
+  }
+  .stat-num{font-family:var(--display); font-size:30px; font-weight:700; color:var(--primary);}
+  .stat-label{font-family:var(--mono); font-size:12px; color:var(--ink-soft); margin-top:4px;}
+
+  /* ---- about ---- */
+  .about-text{max-width:640px; font-size:15.5px; color:var(--ink);}
+  .about-text p{margin-bottom:14px;}
+  .tag-row{display:flex; gap:8px; flex-wrap:wrap; margin-top:18px;}
+  .tag{font-family:var(--mono); font-size:11.5px; padding:4px 11px; border-radius:12px; background:var(--amber-dim); color:var(--amber); border:1px solid #EAD3A3;}
+
+  /* ---- skills as bars ---- */
+  .skills-grid{display:grid; grid-template-columns:1fr 1fr; gap:36px 48px;}
+  @media (max-width:720px){ .skills-grid{grid-template-columns:1fr;} }
+  .skill-group h3{font-family:var(--mono); font-size:12.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-soft); margin-bottom:14px;}
+  .skill-row{margin-bottom:14px;}
+  .skill-row .lbl{display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:6px;}
+  .skill-row .lbl .name{font-weight:500;}
+  .skill-row .lbl .lvl{font-family:var(--mono); font-size:11px; color:var(--ink-soft);}
+  .bar-track{height:7px; background:var(--border); border-radius:4px; overflow:hidden;}
+  .bar-fill{height:100%; background:var(--primary); border-radius:4px; width:0; transition:width 1s cubic-bezier(.2,.8,.3,1);}
+  .bar-fill.amber{background:var(--amber);}
+
+  /* ---- projects ---- */
+  .project-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:12px;
+    padding:26px 28px; margin-bottom:18px;
+  }
+  .project-card.featured{border-color:var(--primary); background:linear-gradient(180deg,#FBFAFE, #FFFFFF);}
+  .pc-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:10px;}
+  .pc-name{font-family:var(--display); font-size:19px; font-weight:600;}
+  .pc-featured-tag{font-family:var(--mono); font-size:10.5px; color:var(--primary); background:var(--primary-dim); padding:3px 9px; border-radius:10px; text-transform:uppercase; letter-spacing:0.04em;}
+  .pc-desc{font-size:14.5px; color:var(--ink); margin-bottom:12px; max-width:600px;}
+  .pc-tags{display:flex; gap:7px; flex-wrap:wrap; margin-bottom:14px;}
+  .pc-tags span{font-family:var(--mono); font-size:11px; color:var(--ink-soft); background:var(--bg); border:1px solid var(--border); padding:3px 9px; border-radius:4px;}
+  .pc-links a{font-family:var(--mono); font-size:12.5px; margin-right:18px;}
+
+  /* ---- timeline (experience + education) ---- */
+  .timeline{border-left:2px solid var(--border); padding-left:24px;}
+  .t-item{position:relative; margin-bottom:26px;}
+  .t-item::before{content:''; position:absolute; left:-30px; top:4px; width:10px; height:10px; border-radius:50%; background:var(--primary); border:2px solid var(--bg);}
+  .t-title{font-weight:600; font-size:15.5px;}
+  .t-sub{font-family:var(--mono); font-size:12px; color:var(--ink-soft); margin-bottom:6px;}
+  .t-desc{font-size:14px; color:var(--ink); max-width:560px;}
+
+  /* ---- contact / footer ---- */
+  .contact-cta{
+    background:var(--ink); color:#F2F4F3; border-radius:18px; padding:52px 44px;
+    text-align:center;
+  }
+  .contact-cta h2{color:#fff; font-size:28px; margin-bottom:10px;}
+  .contact-cta p{color:#B7C0BB; max-width:440px; margin:0 auto 26px;}
+  .contact-cta .cta-row{justify-content:center;}
+  .contact-cta .btn-ghost{background:transparent; color:#fff; border-color:#3A4642;}
+  .contact-cta .btn-ghost:hover{border-color:#fff;}
+
+  footer.credit{text-align:center; padding:28px 0; font-family:var(--mono); font-size:11px; color:var(--ink-soft);}
+  footer.credit .success{color:var(--success);}
+
+  /* reveal on scroll */
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">Spoorti<span>.</span></div>
+    <nav>
+      <div class="nav-links" style="display:flex; gap:22px;">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+      </div>
+      <a class="nav-cta" href="mailto:spoortiinganalli255@gmail.com">Hire me →</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="status-pill"><span class="dot"></span> Open to internships — Remote / Bangalore / Hyderabad · 2026</div>
+      <h1>Turning raw data<br>into <span class="accent">decisions</span>.</h1>
+      <p class="pitch">3rd-year Computer Science student at KLE Institute of Technology, building Python tools and data pipelines — looking for a Data Analyst or Software Engineering internship to do it at real scale.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:spoortiinganalli255@gmail.com">Email me</a>
+        <a class="btn btn-ghost" href="https://github.com/Spoorti-I" target="_blank" rel="noopener">View GitHub ↗</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/spoorti-inganalli/" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
+      </div>
+    </div>
+
+    <div class="quickview">
+      <div class="qv-label">Recruiter quick-view</div>
+      <div class="qv-row"><span class="k">Target role</span><span class="v">Data Analyst / SWE Intern</span></div>
+      <div class="qv-row"><span class="k">Availability</span><span class="v">2026, Remote-friendly</span></div>
+      <div class="qv-row"><span class="k">Location</span><span class="v">Dharwad / Hubli, KA</span></div>
+      <div class="qv-row"><span class="k">Grad year</span><span class="v">2027</span></div>
+      <div class="qv-row"><span class="k">Top skills</span><span class="v">Python, Pandas, FastAPI</span></div>
+      <div class="qv-links">
+        <a href="#" target="_blank" rel="noopener">Resume ↓</a>
+        <a href="https://github.com/Spoorti-I" target="_blank" rel="noopener">GitHub</a>
+        <a href="tel:+918660232633">Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="stats reveal">
+    <div class="stat-card"><div class="stat-num" data-count="3">0</div><div class="stat-label">Projects shipped</div></div>
+    <div class="stat-card"><div class="stat-num" data-count="6">0</div><div class="stat-label">Months, Samsung Innovation Campus</div></div>
+    <div class="stat-card"><div class="stat-num" data-count="3">0</div><div class="stat-label">Certifications earned</div></div>
+    <div class="stat-card"><div class="stat-num" data-count="2027">0</div><div class="stat-label">Graduating year</div></div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">About</div>
+    <h2>The short version</h2>
+    <div class="section-sub"></div>
+    <div class="about-text reveal">
+      <p>I'm a Computer Science undergrad who likes building small, real tools more than theory alone — most recently a tool that writes documentation so other developers don't have to. I trained in Python and data processing at Samsung Innovation Campus, and picked up security fundamentals through a Deloitte Australia Cyber Job Simulation.</p>
+      <p>Outside coursework, I represented Karnataka at the national Ek Bharat Shreshtha Bharat camp in Chamba, Uttarakhand, and built a phishing-detection browser extension at a national hackathon. I'm looking for an internship where I can apply Python and data analysis to real problems, not just assignments.</p>
+      <div class="tag-row">
+        <span class="tag">Data Analysis</span>
+        <span class="tag">Python</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Cybersecurity Fundamentals</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow">Skills</div>
+    <h2>What I actually work with</h2>
+    <div class="section-sub">Rated by hands-on project experience, not course exposure.</div>
+    <div class="skills-grid reveal">
+      <div class="skill-group">
+        <h3>Data</h3>
+        <div class="skill-row">
+          <div class="lbl"><span class="name">Python</span><span class="lvl">Strong</span></div>
+          <div class="bar-track"><div class="bar-fill" data-width="88"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="lbl"><span class="name">Pandas</span><span class="lvl">Strong</span></div>
+          <div class="bar-track"><div class="bar-fill" data-width="82"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="lbl"><span class="name">Data Analysis</span><span class="lvl">Proficient</span></div>
+          <div class="bar-track"><div class="bar-fill" data-width="75"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="lbl"><span class="name">Matplotlib / Scikit-learn</span><span class="lvl">Working knowledge</span></div>
+          <div class="bar-track"><div class="bar-fill" data-width="60"></div></div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Backend &amp; Security</h3>
+        <div class="skill-row">
+          <div class="lbl"><span class="name">FastAPI</span><span class="lvl">Proficient</span></div>
+          <div class="bar-track"><div class="bar-fill amber" data-width="70"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="lbl"><span class="name">Gemini API integration</span><span class="lvl">Proficient</span></div>
+          <div class="bar-track"><div class="bar-fill amber" data-width="72"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="lbl"><span class="name">Cybersecurity Fundamentals</span><span class="lvl">Working knowledge</span></div>
+          <div class="bar-track"><div class="bar-fill amber" data-width="58"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="lbl"><span class="name">Git / GitHub</span><span class="lvl">Proficient</span></div>
+          <div class="bar-track"><div class="bar-fill amber" data-width="76"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow">Projects</div>
+    <h2>Things I've built</h2>
+    <div class="section-sub">Real repos, not tutorials.</div>
+
+    <div class="project-card featured reveal">
+      <div class="pc-top">
+        <div class="pc-name">smart-repo-docs</div>
+        <div class="pc-featured-tag">Flagship project</div>
+      </div>
+      <div class="pc-desc">Auto-generates professional README documentation for any GitHub repository — built a FastAPI backend that reads a codebase's structure and prompts Gemini to draft accurate, well-formatted docs. Solves a problem most developers put off indefinitely.</div>
+      <div class="pc-tags"><span>FastAPI</span><span>Gemini API</span><span>Python</span></div>
+      <div class="pc-links"><a href="https://github.com/Spoorti-I" target="_blank" rel="noopener">View on GitHub ↗</a></div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="pc-top"><div class="pc-name">finance-tracker</div></div>
+      <div class="pc-desc">Command-line tool for tracking and analyzing personal expenses, with visual breakdowns and basic spend forecasting using historical data.</div>
+      <div class="pc-tags"><span>Python</span><span>Pandas</span><span>Matplotlib</span><span>Scikit-learn</span></div>
+      <div class="pc-links"><a href="https://github.com/Spoorti-I" target="_blank" rel="noopener">View on GitHub ↗</a></div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="pc-top"><div class="pc-name">PhishGuard</div></div>
+      <div class="pc-desc">Real-time phishing-detection browser extension built at a national-level hackathon (HTF3, KLS Gogte Institute of Technology). Combines NLP, URL, and behavioral signals across a 7-module scoring system, with homograph detection and WHOIS domain-age checks.</div>
+      <div class="pc-tags"><span>TensorFlow.js</span><span>ONNX</span><span>Chrome Extension</span></div>
+      <div class="pc-links"><a href="https://github.com/Spoorti-I" target="_blank" rel="noopener">View on GitHub ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="eyebrow">Experience &amp; Education</div>
+    <h2>Timeline</h2>
+    <div class="timeline reveal">
+      <div class="t-item">
+        <div class="t-title">Samsung Innovation Campus — Student Program</div>
+        <div class="t-sub">Apr 2024 – Sep 2024 · Hubli, Karnataka</div>
+        <div class="t-desc">Hands-on training in Python and Pandas for real-world data processing tasks, as part of a structured data analysis curriculum.</div>
+      </div>
+      <div class="t-item">
+        <div class="t-title">Deloitte Australia — Cyber Job Simulation</div>
+        <div class="t-sub">Certification</div>
+        <div class="t-desc">Simulated cybersecurity workflow covering real-world security analysis tasks.</div>
+      </div>
+      <div class="t-item">
+        <div class="t-title">NCC — 'A', 'B' &amp; 'C' Certificates</div>
+        <div class="t-sub">National Cadet Corps</div>
+        <div class="t-desc">Represented Karnataka at the national Ek Bharat Shreshtha Bharat camp in Chamba, Uttarakhand.</div>
+      </div>
+      <div class="t-item">
+        <div class="t-title">KLE Institute of Technology, Hubli</div>
+        <div class="t-sub">B.E. Computer Science · Jan 2023 – Jun 2027</div>
+      </div>
+      <div class="t-item">
+        <div class="t-title">Karnataka Science College, Dharwad</div>
+        <div class="t-sub">Pre-University · Jun 2016 – Mar 2021</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-cta reveal">
+      <h2>Let's talk internships.</h2>
+      <p>Open to Data Analyst and Software Engineering roles — remote, Bangalore, or Hyderabad, starting 2026.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:spoortiinganalli255@gmail.com">Email me</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/spoorti-inganalli/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn btn-ghost" href="https://github.com/Spoorti-I" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="credit">built with Python-brain energy · <span class="success">open to work</span> · 2026</footer>
+
+<script>
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>revealObs.observe(el));
+
+  // count-up stats
+  const stats = document.querySelectorAll('.stat-num');
+  const statObs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        let cur = 0;
+        const step = Math.max(1, Math.round(target/40));
+        const tick = ()=>{
+          cur += step;
+          if(cur >= target){ el.textContent = target; }
+          else { el.textContent = cur; requestAnimationFrame(tick); }
+        };
+        tick();
+        statObs.unobserve(el);
+      }
+    });
+  }, {threshold:0.4});
+  stats.forEach(s=>statObs.observe(s));
+
+  // skill bar fill on view
+  const bars = document.querySelectorAll('.bar-fill');
+  const barObs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.style.width = entry.target.dataset.width + '%';
+        barObs.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.3});
+  bars.forEach(b=>barObs.observe(b));
+</script>
+
+</body>
+</html>
